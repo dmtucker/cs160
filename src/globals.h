@@ -19,7 +19,7 @@ bool checkGL ( const char * file , GLuint line , bool required );
 // shaders.cpp
 void initShaders ( );
 
-GLuint currentShader    ( int program );
+GLuint currentShader  ( int program );
 
 void updateView       ( glm::mat4 view );
 void updateProjection ( glm::mat4 projection );

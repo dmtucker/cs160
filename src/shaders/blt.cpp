@@ -1,4 +1,4 @@
-#define shaders[shader_blt]     shaders[shader_blt] //XXX
+#define CTLshader     shaders[shader_blt] //XXX
 #define CTLvPosition  shaderPositions[shader_blt] //XXX
 #define CTLvColor     shaderColors[shader_blt] //XXX
 #define CTLmodel      shaderModels[shader_blt] //XXX

@@ -6,11 +6,6 @@ typedef struct {
 } GPUbuffer;
 
 #define   SHADERS 4
-#include "shaders/basic.cpp"
-#include "shaders/texture.cpp"
-#include "shaders/light.cpp"
-#include "shaders/blt.cpp"
-
 
 GLuint
     shaders[SHADERS],
@@ -25,6 +20,10 @@ GLuint
     shaderViews[SHADERS],
     shaderProjections[SHADERS];
 
+#include "shaders/basic.cpp"
+#include "shaders/texture.cpp"
+#include "shaders/light.cpp"
+#include "shaders/blt.cpp"
 
 
 void initShaders ( ) {
@@ -58,7 +57,7 @@ GLuint currentShader ( int program = -1 ) {
 void updateView ( glm::mat4 view ) {
     for (int i=0; i < SHADERS ;++i) {
         currentShader(shaders[i]);
-        glUniformMatrix4fv(views[i],1,GL_FALSE,glm::value_ptr(view));
+        glUniformMatrix4fv(shaderViews[i],1,GL_FALSE,glm::value_ptr(view));
     }
 }
 
@@ -66,7 +65,7 @@ void updateView ( glm::mat4 view ) {
 void updateProjection ( glm::mat4 projection ) {
     for (int i=0; i < SHADERS ;++i) {
         currentShader(shaders[i]);
-        glUniformMatrix4fv(projections[i],1,GL_FALSE,glm::value_ptr(projection));
+        glUniformMatrix4fv(shaderProjections[i],1,GL_FALSE,glm::value_ptr(projection));
     }
 }
 

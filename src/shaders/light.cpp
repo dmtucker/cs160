@@ -1,9 +1,9 @@
-#define CLshader     shaders[shader_texture] //XXX
-#define CLvPosition  shaderPositions[shader_texture] //XXX
-#define CLvColor     shaderColors[shader_texture] //XXX
-#define CLmodel      shaderModels[shader_texture] //XXX
-#define CLview       shaderViews[shader_texture] //XXX
-#define CLprojection shaderProjections[shader_texture] //XXX
+#define CLshader     shaders[shader_light] //XXX
+#define CLvPosition  shaderPositions[shader_light] //XXX
+#define CLvColor     shaderColors[shader_light] //XXX
+#define CLmodel      shaderModels[shader_light] //XXX
+#define CLview       shaderViews[shader_light] //XXX
+#define CLprojection shaderProjections[shader_light] //XXX
 
 GLuint
     CLvNormal    = 0,
@@ -22,8 +22,8 @@ void initShader_light ( ) {
     if (uninitialized) {
         
         shaders[shader_light] = shaderProgram(
-            "src/shaders/vcl.glsl",
-            "src/shaders/fcl.glsl"
+            "src/shaders/light_vertex.glsl",
+            "src/shaders/light_fragment.glsl"
         );
         if (shaders[shader_light] == 0) {
             fprintf(stderr,"Light Shader Error\n");
