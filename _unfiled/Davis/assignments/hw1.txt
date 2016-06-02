@@ -1,0 +1,47 @@
+1. If your monitor has a display resolution of 1440x1080, how many bytes of memory are required to store each frame that is displayed, assuming three color channels (red, green, and blue) with 8 bits per pixel in each channel? 
+
+
+
+2. You're sitting on a couch 8 feet from your massive 80-inch-diagonal TV (which has a 4:3 aspect ratio). Your head is level with the center of it and you're looking at the center of it. How much of your horizontal field of vision does it take up (in degrees; round to the nearest 1 degree)?
+
+
+
+3. You just bought a new iPhone with a Retina display that claims to have 57 pixels-per-degree when held 10 inches from your head. If the iPhone's screen is 3.5 inches tall and 2 inches wide, what resolution is it running at?
+
+
+
+4. A friend gives you a 10-second video file from a TV show recorded at 60 frames-per-second with a resolution of 640x480 pixels, and a color depth of 24 bits-per-pixel. The video file doesn't use any compression, but when you try to open it your video player crashes with an error message that says "Bad interlacing format." You check the file and see that it's a 263.7 megabytes. Is the file interlaced or progressive? Why?
+
+
+
+5. Imagine that there is an alien race whose perceptions of brightness are opposite that of humans (they perceive an exponential sensation as intensity increases rather than a logarithmic sensation). When using human display technology, the aliens typically adjustment the gamma values which makes pictures look washed out to humans. Are the aliens most likely increasing or decreasing the gamma value compared to the normal human setting, and are they setting it to a value larger than or smaller than 1?
+
+
+
+6. In an unfrequented corner of the internet, you find what you judge to be the cutest of all cat gifs. You immediately decide to send it to all of your friends, and after downloading it, you try to attach it to an email, only to find that the attachment size is too large: the image is 33 MB, but you're only allowed to attach files up to 18 MB in size. Upon further inspection, you find that the gif has 15 frames per second, with a total of 50 frames over 10 seconds. Each frame is a 320x240 pixel image with three 8-bit channels (red, green, and blue) per pixel. First, you try resizing the image, but details get lost and the result just does not capture the cuteness of the original image. Next, you try dropping every other frame, but at only 7.5 frames per second, the image is too choppy, and again, the original cuteness is gone. You open the compression menu of GIFWizerd™ but find that most of the options are only available in the premium version. In fact, the only option available in the default version is "quantize." You click on it, and a menu pops up.
+
+a) The menu has options for something called "bpp," with values of 3, 6, and 12. To preserve as much as possible of the original image quality while making sure that the result will be less than 18 MB in size, which option should you choose? What size will the resulting gif be?
+
+
+b) The menu has an option to use either "Bayer" or "Floyd-Steinberg" dithering. You try both and notice that the resulting file size is the same, but when using one of them, you notice an ugly crosshatch pattern on the flat table in the background of the animation. Which choice produced the pattern, and why?
+
+
+
+7. You're working with a graphics system that can only draw triangles.
+
+a) How many triangles do you need to use to represent a cube?
+
+
+b) You're using normal perspective (things look realistic) with no distortion or reflections and want to increase efficiency by only drawing triangles that the user can see. Given a cube, what is the maximum number of triangles that you might have to draw on a single frame, given that the user can look at the cube from any angle (but always from a fixed distance which is enough to put the viewpoint outside the cube)?
+
+
+c) Draw a picture of the cube from a perspective that requires _fewer_ than this maximum number of triangles to be drawn, and label each triangle that must be drawn in your picture.
+
+
+
+8. In Minecraft, the world is represented by a regular grid of cubes, called blocks. The world is further divided into chunks, each of which is 16x16 blocks horizontally and 128 blocks tall.
+
+a) If half of the blocks in a chunk are stone and half are air (which is invisible and thus does not need to be rendered), assuming each block is represented separately, how many triangles are needed to render every single stone block without making assumptions about camera angle (hint: use the answer to 7.a, but not the answer to 7.b)?
+
+
+b) Further assuming that the bottom half of the blocks are stone and the top half are air (so the chunk represents part of a perfectly flat plain of stone), What is the maximum number of triangles that might be visible to the player from outside the chunk during a single frame (assuming that the player might be able to see the sides of the chunk by mining out neighboring chunks)?
