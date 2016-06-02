@@ -289,7 +289,7 @@ void drawSkeleton ( GLuint selected , glm::mat4 model = glm::mat4() ) {
     model = glm::translate(model,glm::normalize(glm::vec3(vUp))*legShift);
     
     glm::vec4 pSkeleton = model*AXIS_ORIGIN;
-    model = glm::translate(model,glm::vec3(0,RED(PIXEL(terrain,(GLint) (pSkeleton.x),(GLint) (pSkeleton.z))),0));
+    skeletonTorso.model = glm::translate(model,glm::vec3(0,RED(PIXEL(terrain,(GLint) (pSkeleton.x),(GLint) (pSkeleton.z))),0));
     
 //    pSkeleton = model*AXIS_ORIGIN;
 //    if (pSkeleton.x <  0)              pSkeleton.x = 0;
@@ -313,6 +313,5 @@ void drawSkeleton ( GLuint selected , glm::mat4 model = glm::mat4() ) {
         skeletonLkick     =  (variation*  5)- 5;
     }
     
-    skeletonTorso.model = model;
     recursiveSkeleton(&skeletonTorso);
 }

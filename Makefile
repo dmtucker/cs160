@@ -1,7 +1,6 @@
 BINARIES  = bin
 SOURCE    = src
 TEMPORARY = tmp
-VARIABLE  = var
 
 PROJECT = main
 BUILDER = $(TEMPORARY)/$(PROJECT).o $(TEMPORARY)/ppm_canvas.o
