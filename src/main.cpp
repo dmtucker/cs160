@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/projection.hpp>
@@ -34,28 +36,28 @@ canvas_t terrain, texture;
 
 
 int main ( int argc , char * argv[] ) {
-    
+
     if (argc < 3) {
         fprintf(stderr,"usage: %s [terrain] [texture]\n",argv[0]);
         return EXIT_FAILURE;
     }
     if (ppmLoadCanvas(argv[1],&terrain) != 0) puts("Terrain Load Failure"); //XXX
     if (ppmLoadCanvas(argv[2],&texture) != 0) puts("Texture Load Failure"); //XXX
-    
+
     initialize();
     while (not glfwWindowShouldClose(defaultWindow)) {
-        
+
         glfwGetWindowPos (defaultWindow,&windowX,&windowY);
         glfwGetWindowSize(defaultWindow,&windowW,&windowH);
-        checkGL(__FILE__,__LINE__);
-        
+        //checkGL(__FILE__,__LINE__);
+
         if (FPS <= MAX_FPS) {
-            
+
             static glm::vec3
                 pPrevious = pCursor;
                 vCursor = pCursor-pPrevious;
                 pPrevious = pCursor;
-            
+
             reorient();
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
             drawTitle();
@@ -63,7 +65,7 @@ int main ( int argc , char * argv[] ) {
             glfwSwapBuffers(defaultWindow);
             ++frames;
         }
-        
+
         glfwPollEvents();
     }
     initialize();

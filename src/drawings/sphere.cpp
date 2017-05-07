@@ -15,12 +15,12 @@ void recursiveIconosphereQuadrant ( glm::vec4 a ,
                                     glm::vec4 * colors ,
                                     glm::vec4 * normals ) {
     if (level > 0) {
-        
+
         glm::vec4 m[3];
         m[0] = (a+b)/2.0;
         m[1] = (a+c)/2.0;
         m[2] = (b+c)/2.0;
-        
+
         for (GLuint i=0 ; i < 3 ;++i) {
             if (SPHERE_SOURCE) {
                 m[i]   = glm::normalize(m[i]);
@@ -31,14 +31,14 @@ void recursiveIconosphereQuadrant ( glm::vec4 a ,
                 m[i] =                glm::vec4(m[i].x,m[i].y,m[i].z,1.0);
             }
         }
-        
+
         recursiveIconosphereQuadrant(a   ,m[0],m[1],level-1,points,colors,normals);
         recursiveIconosphereQuadrant(m[0],b   ,m[2],level-1,points,colors,normals);
         recursiveIconosphereQuadrant(m[1],m[2],c   ,level-1,points,colors,normals);
         recursiveIconosphereQuadrant(m[0],m[2],m[1],level-1,points,colors,normals);
     }
     else {
-        
+
         static GLuint i = 0;
         points[i] = normals[i] = a; colors[i] = palette[SPHERE_COLOR]; ++i;
         points[i] = normals[i] = b; colors[i] = palette[SPHERE_COLOR]; ++i;
@@ -50,20 +50,20 @@ void recursiveIconosphereQuadrant ( glm::vec4 a ,
 void initSphere ( bool UV = false ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         glm::vec4 * const points  = new glm::vec4[sphereTriangles*3];
         glm::vec4 * const colors  = new glm::vec4[sphereTriangles*3];
         glm::vec4 * const normals = new glm::vec4[sphereTriangles*3];
-        
+
         if (SPHERE_SOURCE) pSelection[0] = glm::vec4(0,FAR,0,1);
-        
+
         if (UV) { //XXX UV sphere
 //            GLuint I = 0;
 //            points[I] = vec4( 0, 1, 0, 1);
 //            colors[I] = SPHERE_COLOR;
 //            GLfloat delta = (2*PI)/sphereIterations;
 //            for (int i = 0; i < sphereIterations ;++i) {
-//                
+//
 //            }
         }
         else {
@@ -82,7 +82,7 @@ void initSphere ( bool UV = false ) {
             recursiveIconosphereQuadrant(f,e,d,sphereIterations,points,colors,normals);
             recursiveIconosphereQuadrant(f,b,e,sphereIterations,points,colors,normals);
         }
-        
+
         if (SPHERE_LIGHT) CLobject(
             &sphereBuffer,
              sphereTriangles*3,
@@ -96,7 +96,7 @@ void initSphere ( bool UV = false ) {
             points,
             colors
         );
-        
+
         delete [] normals;
         delete [] colors;
         delete [] points;
@@ -110,26 +110,26 @@ void initSphere ( bool UV = false ) {
 
 
 void drawSphere ( glm::mat4 model = glm::mat4() ) {
-    
+
     if (SPHERE_LIGHT) {
-        
+
         currentShader(CLshader);
         glBindVertexArray(sphereBuffer.VAO);
-        
+
         glUniformMatrix4fv(CLmodel,1,GL_FALSE,glm::value_ptr(model));
-        
+
         glUniform1f (CLmShininess,  bright_shininess);
         glUniform4fv(CLmAmbient  ,1,glm::value_ptr(bright_ambient));
         glUniform4fv(CLmDiffuse  ,1,glm::value_ptr(bright_diffuse));
         glUniform4fv(CLmSpecular ,1,glm::value_ptr(bright_specular));
     }
     else {
-        
+
         currentShader(Cshader);
         glBindVertexArray(sphereBuffer.VAO);
-        
+
         glUniformMatrix4fv(Cmodel,1,GL_FALSE,glm::value_ptr(model));
     }
-    
+
     glDrawArrays(GL_TRIANGLES,0,sphereTriangles*3);
 }

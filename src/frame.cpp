@@ -1,5 +1,5 @@
 #include "drawings/cartesian.cpp"
-#include "drawings/sphere.cpp"
+//#include "drawings/sphere.cpp"
 #include "drawings/terrain.cpp"
 #include "drawings/skeleton.cpp"
 
@@ -10,26 +10,26 @@
 void initFrame ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         initCartesian();
-        initSphere();
+//        initSphere();
         initTerrain();
         initSkeleton();
-        
+
 //        initColorcube(); //XXX
 //        initSierpinski(); //XXX
-        
+
         pEye   = glm::vec4(terrain.width/2,200,terrain.height/2,1);
         pFocus = AXIS_ORIGIN;
     }
     else {
-        
+
 //        initSierpinski(); //XXX
 //        initColorcube(); //XXX
-        
+
         initSkeleton();
         initTerrain();
-        initSphere();
+//        initSphere();
         initCartesian();
     }
     uninitialized = not uninitialized;
@@ -64,10 +64,10 @@ bool
     skeleton9 = false;
 
 void drawFrame ( ) {
-    
+
                    drawCartesian();
                    drawTerrain  ();
-    if (lighting)  drawSphere   (glm::translate(glm::mat4(),glm::vec3(pSelection[0])));
+//    if (lighting)  drawSphere   (glm::translate(glm::mat4(),glm::vec3(pSelection[0])));
     if (skeleton1) drawSkeleton (1,glm::translate(glm::mat4(),glm::vec3(pSelection[1])));
     if (skeleton2) drawSkeleton (2,glm::translate(glm::mat4(),glm::vec3(pSelection[2])));
     if (skeleton3) drawSkeleton (3,glm::translate(glm::mat4(),glm::vec3(pSelection[3])));
@@ -77,7 +77,7 @@ void drawFrame ( ) {
     if (skeleton7) drawSkeleton (7,glm::translate(glm::mat4(),glm::vec3(pSelection[7])));
     if (skeleton8) drawSkeleton (8,glm::translate(glm::mat4(),glm::vec3(pSelection[8])));
     if (skeleton9) drawSkeleton (9,glm::translate(glm::mat4(),glm::vec3(pSelection[9])));
-    
+
 //    GLfloat s = 10;
 //     drawColorcube(scale(mat4(),vec3(s,s,s))); //XXX
 //    drawSierpinski(scale(mat4(),vec3(s,s,s))); //XXX
