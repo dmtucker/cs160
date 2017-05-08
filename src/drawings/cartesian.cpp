@@ -12,7 +12,7 @@ GPUbuffer axisBuffer,   gridBuffer;
 void initAxis ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         const GLfloat l = GRID_LENGTH;
         glm::vec4 axisXYZW[12] = {
             AXIS_ORIGIN, l*AXIS_X,
@@ -20,7 +20,7 @@ void initAxis ( ) {
             AXIS_ORIGIN, l*AXIS_Y,
             AXIS_ORIGIN,-l*AXIS_Y,
             AXIS_ORIGIN, l*AXIS_Z,
-            AXIS_ORIGIN,-l*AXIS_Z 
+            AXIS_ORIGIN,-l*AXIS_Z
         };
         glm::vec4 axisRGBA[12] = {
             palette[BASIC_RED]  ,palette[BASIC_WHITE], // +x
@@ -30,7 +30,7 @@ void initAxis ( ) {
             palette[BASIC_BLUE] ,palette[BASIC_WHITE], // +z
             palette[BASIC_BLUE] ,palette[BASIC_BLACK]  // -z
         };
-        
+
         Cobject(
             &axisBuffer,
             12,
@@ -46,20 +46,20 @@ void initAxis ( ) {
 void initGrid ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         const GLfloat l = GRID_LENGTH;
         const GLint gridNaturals = l/GRID_DELTA;
-        
+
         glm::vec4
             gridXYZW[gridNaturals*16],
             gridRGBA[gridNaturals*16];
-        
+
         int p = 0;
         for (int i=0; i < gridNaturals ;++i) {
-            
+
             int offset = i*GRID_DELTA;
             if (offset > FAR) offset = FAR;
-            
+
             // Quadrant 1 (+X,-Z)
             gridXYZW[p] = glm::vec4( offset,0, 0,1);
             gridRGBA[p] = palette[GRID_COLOR_Q1];
@@ -67,7 +67,7 @@ void initGrid ( ) {
             gridXYZW[p] = glm::vec4( offset,0,-l,1);
             gridRGBA[p] = palette[GRID_COLOR_Q1];
                    ++p;
-            
+
             // Quadrant 1 (-Z,+X)
             gridXYZW[p] = glm::vec4( 0,0,-offset,1);
             gridRGBA[p] = palette[GRID_COLOR_Q1];
@@ -75,7 +75,7 @@ void initGrid ( ) {
             gridXYZW[p] = glm::vec4( l,0,-offset,1);
             gridRGBA[p] = palette[GRID_COLOR_Q1];
                    ++p;
-            
+
             // Quadrant 2 (-X,-Z)
             gridXYZW[p] = glm::vec4(-offset,0, 0,1);
             gridRGBA[p] = palette[GRID_COLOR_Q2];
@@ -83,7 +83,7 @@ void initGrid ( ) {
             gridXYZW[p] = glm::vec4(-offset,0,-l,1);
             gridRGBA[p] = palette[GRID_COLOR_Q2];
                    ++p;
-            
+
             // Quadrant 2 (-Z,-X)
             gridXYZW[p] = glm::vec4( 0,0,-offset,1);
             gridRGBA[p] = palette[GRID_COLOR_Q2];
@@ -91,7 +91,7 @@ void initGrid ( ) {
             gridXYZW[p] = glm::vec4(-l,0,-offset,1);
             gridRGBA[p] = palette[GRID_COLOR_Q2];
                    ++p;
-            
+
             // Quadrant 3 (-X,+Z)
             gridXYZW[p] = glm::vec4(-offset,0, 0,1);
             gridRGBA[p] = palette[GRID_COLOR_Q3];
@@ -99,7 +99,7 @@ void initGrid ( ) {
             gridXYZW[p] = glm::vec4(-offset,0, l,1);
             gridRGBA[p] = palette[GRID_COLOR_Q3];
                    ++p;
-            
+
             // Quadrant 3 (+Z,-X)
             gridXYZW[p] = glm::vec4( 0,0, offset,1);
             gridRGBA[p] = palette[GRID_COLOR_Q3];
@@ -107,7 +107,7 @@ void initGrid ( ) {
             gridXYZW[p] = glm::vec4(-l,0, offset,1);
             gridRGBA[p] = palette[GRID_COLOR_Q3];
                    ++p;
-            
+
             // Quadrant 4 (+X,+Z)
             gridXYZW[p] = glm::vec4( offset,0, 0,1);
             gridRGBA[p] = palette[GRID_COLOR_Q4];
@@ -115,7 +115,7 @@ void initGrid ( ) {
             gridXYZW[p] = glm::vec4( offset,0, l,1);
             gridRGBA[p] = palette[GRID_COLOR_Q4];
                    ++p;
-            
+
             // Quadrant 4 (+Z,+X)
             gridXYZW[p] = glm::vec4( 0,0, offset,1);
             gridRGBA[p] = palette[GRID_COLOR_Q4];
@@ -124,7 +124,7 @@ void initGrid ( ) {
             gridRGBA[p] = palette[GRID_COLOR_Q4];
                    ++p;
         }
-        
+
         Cobject(
             &gridBuffer,
              gridNaturals*16,
@@ -152,19 +152,19 @@ void initCartesian ( ) {
 
 
 void drawCartesian ( glm::mat4 model  = glm::mat4() ) {
-    
+
     currentShader(Cshader);
-    
+
     if (axis) {
         glBindVertexArray(axisBuffer.VAO);
         glUniformMatrix4fv(Cmodel,1,GL_FALSE,glm::value_ptr(model));
         glDrawArrays(GL_LINES,0,12);
     }
-    
+
     if (grid) {
         glBindVertexArray(gridBuffer.VAO);
         glUniformMatrix4fv(Cmodel,1,GL_FALSE,glm::value_ptr(model));
-        
+
         const int adjust = (axis) ? 1 : 0;
         glDrawArrays(GL_LINES,16*adjust,16*((GRID_LENGTH/GRID_DELTA)-adjust));
     }

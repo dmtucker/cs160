@@ -22,7 +22,7 @@ GLuint
 void initShader_blt ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         shaders[shader_blt] = shaderProgram(
             "src/shaders/blt_vertex.glsl",
             "src/shaders/blt_fragment.glsl"
@@ -32,7 +32,7 @@ void initShader_blt ( ) {
             exit(EXIT_FAILURE);
         }
         currentShader(shaders[shader_blt]);
-        
+
         CTLmodel       = glGetUniformLocation(shaders[shader_blt],"model");
         CTLview        = glGetUniformLocation(shaders[shader_blt],"view");
         CTLprojection  = glGetUniformLocation(shaders[shader_blt],"projection");
@@ -49,7 +49,7 @@ void initShader_blt ( ) {
         CTLmAmbient    = glGetUniformLocation(shaders[shader_blt],"material_ambient");
         CTLmDiffuse    = glGetUniformLocation(shaders[shader_blt],"material_diffuse");
         CTLmSpecular   = glGetUniformLocation(shaders[shader_blt],"material_specular");
-        
+
 //        printf("CTLmodel       (%d)\n",CTLmodel);
 //        printf("CTLview        (%d)\n",CTLview);
 //        printf("CTLprojection  (%d)\n",CTLprojection);
@@ -66,7 +66,7 @@ void initShader_blt ( ) {
 //        printf("CTLmAmbient    (%d)\n",CTLmAmbient);
 //        printf("CTLmDiffuse    (%d)\n",CTLmDiffuse);
 //        printf("CTLmSpecular   (%d)\n",CTLmSpecular);
-        
+
         glUniformMatrix4fv(CTLmodel     ,1,GL_FALSE,glm::value_ptr(glm::mat4()));
         glUniformMatrix4fv(CTLview      ,1,GL_FALSE,glm::value_ptr(glm::mat4()));
         glUniformMatrix4fv(CTLprojection,1,GL_FALSE,glm::value_ptr(glm::mat4()));
@@ -84,15 +84,15 @@ void CTLobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 *   points ,
                                                     glm::vec4 *   colors ,
                                                     glm::vec2 * textures ,
                                                     glm::vec4 *  normals ) {
-    
+
     size_t offset = 0;
     size_t size_points   = sizeof(glm::vec4)*vertices;
     size_t size_colors   = sizeof(glm::vec4)*vertices;
     size_t size_textures = sizeof(glm::vec2)*vertices;
     size_t size_normals  = sizeof(glm::vec4)*vertices;
-    
+
     currentShader(shaders[shader_blt]);
-    
+
     glGenBuffers(1,&VO->VBO);
     glBindBuffer(GL_ARRAY_BUFFER,VO->VBO);
     glBufferData(
@@ -105,9 +105,9 @@ void CTLobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 *   points ,
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_colors  ,VOID(colors));         offset += size_colors;
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_textures,VOID(textures));       offset += size_textures;
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_normals ,VOID(normals));        offset += size_normals;
-    
+
     offset = 0;
-    
+
     glGenVertexArrays(1,&VO->VAO);
     glBindVertexArray(VO->VAO);
     glEnableVertexAttribArray(CTLvPosition);
@@ -122,10 +122,10 @@ void CTLobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 *   points ,
 
 
 void cleanCTLobject ( GPUbuffer * VO ) {
-    
+
     glBindVertexArray(0);
     glDeleteVertexArrays(1,&VO->VAO);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER,0);
     glDeleteBuffers(1,&VO->VBO);
 }

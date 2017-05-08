@@ -42,7 +42,7 @@ bool
     moveD = false, lookD = false,
     moveB = false,
     moveF = false,
-    
+
     orbitCW  = false,
     orbitCCW = false;
 
@@ -65,19 +65,19 @@ void initOrientation ( ) {
 
 
 void reorient ( ) {
-    
+
     glm::vec4 vForward = glm::normalize(pFocus-pEye);
     glm::vec4 vAhead   = glm::normalize(glm::vec4(vForward.x,0,vForward.z,vForward.w));
     glm::vec4 vRight   = glm::normalize(glm::vec4(glm::cross(glm::vec3(vForward),glm::vec3(vUp)),0));
     pFocus = vForward+pEye;
-    
+
     glm::mat4 orbit = glm::mat4();
     const GLfloat velocity = rad(3.5);
     if (orbitCW xor orbitCCW) orbit = (orbitCCW) ?
                   glm::rotate(orbit, velocity,glm::vec3(vUp)):
                   glm::rotate(orbit,-velocity,glm::vec3(vUp));
     pEye = orbit*pEye;
-    
+
     glm::mat4 position = glm::mat4();
     const GLfloat agility = 2.0;
     if (moveL xor moveR) position = (moveR) ?
@@ -91,7 +91,7 @@ void reorient ( ) {
           glm::translate(position,glm::vec3(-vForward*agility));
     pEye   = position*pEye;
     pFocus = position*pFocus;
-    
+
     glm::mat4 attention = glm::mat4();
     const GLfloat sensitivity = rad(4);
     if (lookL xor lookR) attention = (lookL) ?
@@ -101,13 +101,13 @@ void reorient ( ) {
              glm::rotate(attention, sensitivity,glm::vec3(vRight)):
              glm::rotate(attention,-sensitivity,glm::vec3(vRight));
     pFocus = pEye+(attention*vForward);
-    
+
     glm::mat4 view = glm::lookAt(glm::vec3(pEye),glm::vec3(pFocus),glm::vec3(vUp));
               view = glm::scale(view,glm::vec3(zoom,zoom,zoom));
     updateView(view);
     updateProjection(PROJECTION);
-    
-    
+
+
     position = glm::mat4();
     if (selectionMoveL[selection] xor selectionMoveR[selection])
         position = (selectionMoveR[selection]) ?
@@ -122,19 +122,19 @@ void reorient ( ) {
             glm::translate(position,glm::vec3( vAhead*agility)):
             glm::translate(position,glm::vec3(-vAhead*agility));
     pSelection[selection] = position*pSelection[selection];
-    
-    
+
+
     updateLight(pSelection[0],light_ambient,light_diffuse,light_specular);
 }
 
 
 bool toggleLight ( bool enable = not lighting ) {
-    
+
     static glm::vec4
         previous_ambient,
         previous_diffuse,
         previous_specular;
-    
+
     if (enable) {
         light_ambient  = previous_ambient;
         light_diffuse  = previous_diffuse;
@@ -144,7 +144,7 @@ bool toggleLight ( bool enable = not lighting ) {
         previous_ambient  = light_ambient;
         previous_diffuse  = light_diffuse;
         previous_specular = light_specular;
-        
+
         const GLfloat dark = 0.025;
         light_ambient  = glm::vec4(dark,dark,dark,1);
         light_diffuse  = glm::vec4(dark,dark,dark,1);

@@ -39,7 +39,7 @@
 #define CSS_YELLOW    31
 
 const glm::vec4 palette[32] = {
-    
+
     // (8) basic
     glm::vec4(0.000,0.000,0.000,1.000), // black
     glm::vec4(0.000,0.000,1.000,1.000), // blue
@@ -49,7 +49,7 @@ const glm::vec4 palette[32] = {
     glm::vec4(1.000,0.000,1.000,1.000), // magenta
     glm::vec4(1.000,1.000,0.000,1.000), // yellow
     glm::vec4(1.000,1.000,1.000,1.000), // white
-    
+
     // (7) grayscale
     glm::vec4(0.875,0.875,0.875,1.000), // lightest gray
     glm::vec4(0.750,0.750,0.750,1.000), // lighter gray
@@ -58,7 +58,7 @@ const glm::vec4 palette[32] = {
     glm::vec4(0.375,0.375,0.375,1.000), // dark gray
     glm::vec4(0.250,0.250,0.250,1.000), // darker gray
     glm::vec4(0.125,0.125,0.125,1.000), // darkest gray
-    
+
     // (17) CSS standard
     glm::vec4(0.000,1.000,1.000,1.000), // aqua
     glm::vec4(0.000,0.000,0.000,1.000), // black

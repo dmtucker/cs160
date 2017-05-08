@@ -56,14 +56,14 @@ bool skeletonPlay[10];
 
 
 void drawBone ( glm::mat4 model = glm::mat4() ){
-    
+
     glUniformMatrix4fv(Cmodel,1,GL_FALSE,glm::value_ptr(model));
     glDrawArrays(GL_LINES,0,2);
 };
 
 
 void buildRarm ( ) {
-    
+
     skeletonRclavicle.model = glm::mat4();
     skeletonRclavicle.draw  = [](){
         skeletonRclavicle.model = SKELETON_COLLAR(skeletonRshrug,glm::vec3(AXIS_Z));
@@ -74,7 +74,7 @@ void buildRarm ( ) {
     };
     skeletonRclavicle.child   = &skeletonRhumerus;
     skeletonRclavicle.sibling = &skeletonRpelvis;
-    
+
     skeletonRhumerus.model = glm::mat4();
     skeletonRhumerus.draw  = [](){
         skeletonRhumerus.model = SKELETON_BICEP(skeletonRclavicle.model,skeletonRflex,glm::vec3(AXIS_Z));
@@ -85,7 +85,7 @@ void buildRarm ( ) {
     };
     skeletonRhumerus.child   = &skeletonRradius;
     skeletonRhumerus.sibling = NULL;
-    
+
     skeletonRradius.model = glm::mat4();
     skeletonRradius.draw  = [](){
         skeletonRradius.model = SKELETON_FOREARM(skeletonRhumerus.model,skeletonRsqueeze,glm::vec3(AXIS_Z));
@@ -100,7 +100,7 @@ void buildRarm ( ) {
 
 
 void buildLarm ( ) {
-    
+
     skeletonLclavicle.model = glm::mat4();
     skeletonLclavicle.draw  = [](){
         skeletonLclavicle.model = SKELETON_COLLAR(skeletonLshrug,glm::vec3(AXIS_Z));
@@ -111,7 +111,7 @@ void buildLarm ( ) {
     };
     skeletonLclavicle.child   = &skeletonLhumerus;
     skeletonLclavicle.sibling = NULL;
-    
+
     skeletonLhumerus.model = glm::mat4();
     skeletonLhumerus.draw  = [](){
         skeletonLhumerus.model = SKELETON_BICEP(skeletonLclavicle.model,skeletonLflex,glm::vec3(AXIS_Z));
@@ -122,7 +122,7 @@ void buildLarm ( ) {
     };
     skeletonLhumerus.child   = &skeletonLradius;
     skeletonLhumerus.sibling = NULL;
-    
+
     skeletonLradius.model = glm::mat4();
     skeletonLradius.draw  = [](){
         skeletonLradius.model = SKELETON_FOREARM(skeletonLhumerus.model,skeletonLsqueeze,glm::vec3(AXIS_Z));
@@ -137,7 +137,7 @@ void buildLarm ( ) {
 
 
 void buildRleg ( ) {
-    
+
     skeletonRpelvis.model = glm::mat4();
     skeletonRpelvis.draw  = [](){
         skeletonRpelvis.model = SKELETON_WAIST(skeletonBooty,glm::vec3(AXIS_Z));
@@ -148,7 +148,7 @@ void buildRleg ( ) {
     };
     skeletonRpelvis.child   = &skeletonRfemur;
     skeletonRpelvis.sibling = &skeletonLpelvis;
-    
+
     skeletonRfemur.model = glm::mat4();
     skeletonRfemur.draw  = [](){
         skeletonRfemur.model = SKELETON_QUAD(skeletonRpelvis.model,skeletonRlunge,glm::vec3(AXIS_Z));
@@ -159,7 +159,7 @@ void buildRleg ( ) {
     };
     skeletonRfemur.child   = &skeletonRtibia;
     skeletonRfemur.sibling = NULL;
-    
+
     skeletonRtibia.model = glm::mat4();
     skeletonRtibia.draw  = [](){
         skeletonRtibia.model = SKELETON_CALF(skeletonRfemur.model,skeletonRkick,glm::vec3(AXIS_Z));
@@ -174,7 +174,7 @@ void buildRleg ( ) {
 
 
 void buildLleg ( ) {
-    
+
     skeletonLpelvis.model = glm::mat4();
     skeletonLpelvis.draw  = [](){
         skeletonLpelvis.model = SKELETON_WAIST(skeletonBooty-180,glm::vec3(AXIS_Z));
@@ -185,7 +185,7 @@ void buildLleg ( ) {
     };
     skeletonLpelvis.child   = &skeletonLfemur;
     skeletonLpelvis.sibling = &skeletonLclavicle;
-    
+
     skeletonLfemur.model = glm::mat4();
     skeletonLfemur.draw  = [](){
         skeletonLfemur.model = SKELETON_QUAD(skeletonLpelvis.model,skeletonLlunge,glm::vec3(AXIS_Z));
@@ -196,7 +196,7 @@ void buildLleg ( ) {
     };
     skeletonLfemur.child   = &skeletonLtibia;
     skeletonLfemur.sibling = NULL;
-    
+
     skeletonLtibia.model = glm::mat4();
     skeletonLtibia.draw  = [](){
         skeletonLtibia.model = SKELETON_CALF(skeletonLfemur.model,skeletonLkick,glm::vec3(AXIS_Z));
@@ -211,7 +211,7 @@ void buildLleg ( ) {
 
 
 void buildSkeleton ( ) {
-    
+
     skeletonTorso.model = glm::scale(
         glm::mat4(),
         glm::vec3(TORSO_SCALE,TORSO_SCALE,TORSO_SCALE)
@@ -219,7 +219,7 @@ void buildSkeleton ( ) {
     skeletonTorso.draw = [](){ drawBone(skeletonTorso.model); };
     skeletonTorso.child   = &skeletonHead;
     skeletonTorso.sibling = NULL;
-    
+
     skeletonHead.model = glm::mat4();
     skeletonHead.draw  = [](){
         skeletonHead.model = SKELETON_NECK;
@@ -230,7 +230,7 @@ void buildSkeleton ( ) {
     };
     skeletonHead.child   = NULL;
     skeletonHead.sibling = &skeletonRclavicle;
-    
+
     buildLarm(); buildLleg();
     buildRarm(); buildRleg();
 }
@@ -239,22 +239,22 @@ void buildSkeleton ( ) {
 void initSkeleton ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         glm::vec4 * const points = new glm::vec4[2];
         glm::vec4 * const colors = new glm::vec4[2];
-        
+
         for (int i=0; i < 10 ;++i) { skeletonPlay[i] = false; }
         buildSkeleton();
         points[0] = AXIS_ORIGIN;        colors[0] = palette[BASIC_WHITE];
         points[1] = glm::vec4(0,1,0,1); colors[1] = palette[BASIC_WHITE];
-        
+
         Cobject(
             &boneBuffer,
             2,
             points,
             colors
         );
-        
+
         delete [] colors;
         delete [] points;
     }
@@ -264,7 +264,7 @@ void initSkeleton ( ) {
 
 
 void recursiveSkeleton ( bone_t * root ) {
-    
+
     if (root == NULL) return;
         root->draw();
     if (root->child   != NULL) recursiveSkeleton(root->child);
@@ -273,10 +273,10 @@ void recursiveSkeleton ( bone_t * root ) {
 
 
 void drawSkeleton ( GLuint selected , glm::mat4 model = glm::mat4() ) {
-    
+
     currentShader(Cshader);
     glBindVertexArray(boneBuffer.VAO);
-    
+
     GLfloat legShift = 0;
     legShift += glm::max(
         glm::abs(glm::sin(rad(skeletonLlunge)))*FEMUR_SCALE,
@@ -287,20 +287,20 @@ void drawSkeleton ( GLuint selected , glm::mat4 model = glm::mat4() ) {
         glm::abs(glm::sin(rad(skeletonRlunge+skeletonRkick)))*TIBIA_SCALE
     );
     model = glm::translate(model,glm::normalize(glm::vec3(vUp))*legShift);
-    
+
     glm::vec4 pSkeleton = model*AXIS_ORIGIN;
     skeletonTorso.model = glm::translate(model,glm::vec3(0,RED(PIXEL(terrain,(GLint) (pSkeleton.x),(GLint) (pSkeleton.z))),0));
-    
+
 //    pSkeleton = model*AXIS_ORIGIN;
 //    if (pSkeleton.x <  0)              pSkeleton.x = 0;
 //    if (pSkeleton.x >= terrain.width)  pSkeleton.x = terrain.width-1;
 //    if (pSkeleton.z <  0)              pSkeleton.z = 0;
 //    if (pSkeleton.z >= terrain.height) pSkeleton.z = terrain.height-1;
-    
+
     if (skeletonPlay[selected]) {
-        
+
         GLfloat variation = sin(rad(glfwGetTime()*300));
-        
+
         skeletonRshrug    =  (variation*  5)+90,
         skeletonRflex     =  (variation* 80),
         skeletonRsqueeze  =  (variation* 10),
@@ -312,6 +312,6 @@ void drawSkeleton ( GLuint selected , glm::mat4 model = glm::mat4() ) {
         skeletonLlunge    =  (variation*-15)-75,
         skeletonLkick     =  (variation*  5)- 5;
     }
-    
+
     recursiveSkeleton(&skeletonTorso);
 }

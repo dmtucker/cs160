@@ -13,7 +13,7 @@ GLuint
     shader_texture = 1,
     shader_light   = 2,
     shader_blt     = 3,
-    
+
     shaderPositions[SHADERS],
     shaderColors[SHADERS],
     shaderModels[SHADERS],
@@ -71,13 +71,13 @@ void updateProjection ( glm::mat4 projection ) {
 
 
 void updateLight ( glm::vec4 position , glm::vec4 ambient , glm::vec4 diffuse , glm::vec4 specular ) {
-    
+
     currentShader(shaders[shader_light]);
     glUniform4fv(CLlPosition ,1,glm::value_ptr(position));
     glUniform4fv(CLlAmbient  ,1,glm::value_ptr(ambient));
     glUniform4fv(CLlDiffuse  ,1,glm::value_ptr(diffuse));
     glUniform4fv(CLlSpecular ,1,glm::value_ptr(specular));
-    
+
     currentShader(shaders[shader_blt]);
     glUniform4fv(CTLlPosition,1,glm::value_ptr(position));
     glUniform4fv(CTLlAmbient ,1,glm::value_ptr(ambient));

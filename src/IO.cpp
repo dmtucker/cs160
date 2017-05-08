@@ -8,12 +8,12 @@ static void resize ( GLFWwindow * window , int width , int height ) {
 
 
 static void keyboard ( GLFWwindow * window , int key , int scancode , int action , int mods ) {
-    
+
     switch (key) {
         default: return;
         // http://www.glfw.org/docs/latest/group__keys.html
         // http://www.glfw.org/docs/latest/group__mods.html
-        
+
         case GLFW_KEY_A:
             if (mods == GLFW_MOD_CONTROL) switch (action) { // toggle axis
                 case GLFW_PRESS: axis = not axis; break;
@@ -27,7 +27,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_C: // toggle culling
             if (mods == GLFW_MOD_CONTROL and action == GLFW_PRESS) {
                 cull = not cull;
@@ -35,7 +35,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 else     glDisable(GL_CULL_FACE);
             }
             break;
-        
+
         case GLFW_KEY_D: // strafe right
             switch (action) {
                 case GLFW_PRESS:
@@ -44,12 +44,12 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-            
-        
+
+
         case GLFW_KEY_G: // toggle grid
             if (mods == GLFW_MOD_CONTROL and action == GLFW_PRESS) grid = not grid;
             break;
-        
+
         case GLFW_KEY_H: // help
             if (action == GLFW_PRESS) {
                 putchar('\n');
@@ -83,15 +83,15 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 puts("ctrl-w      toggle wireframe");
             }
             break;
-        
+
         case GLFW_KEY_P:
             if (mods == GLFW_MOD_CONTROL and action == GLFW_PRESS) skeletonPlay[selection] = not skeletonPlay[selection];
             break;
-        
+
         case GLFW_KEY_Q: // quit
             if (mods == GLFW_MOD_CONTROL and action == GLFW_PRESS) glfwSetWindowShouldClose(window,GL_TRUE);
             break;
-        
+
         case GLFW_KEY_S:
             switch (action) { // move backward
                 case GLFW_PRESS:
@@ -100,7 +100,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_W:
             if (mods == GLFW_MOD_CONTROL) switch (action) { // toggle wireframe
                 case GLFW_PRESS:
@@ -118,7 +118,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_PAGE_UP: // ascend
             switch (action) {
                 case GLFW_PRESS:
@@ -127,7 +127,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_PAGE_DOWN: // descend
             switch (action) {
                 case GLFW_PRESS:
@@ -136,7 +136,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_HOME: // orbit CW
             switch (action) {
                 case GLFW_PRESS:
@@ -145,7 +145,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_END: // orbit CCW
             switch (action) {
                 case GLFW_PRESS:
@@ -154,7 +154,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_LEFT: // look left
             switch (action) {
                 case GLFW_PRESS:
@@ -163,7 +163,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_RIGHT: // look right
             switch (action) {
                 case GLFW_PRESS:
@@ -172,7 +172,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_DOWN: // look down
             switch (action) {
                 case GLFW_PRESS:
@@ -181,7 +181,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_UP: // look up
             switch (action) {
                 case GLFW_PRESS:
@@ -190,82 +190,82 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: break;
             }
             break;
-        
+
         case GLFW_KEY_0:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) toggleLight();
             }
             else selection = 0;
             break;
-        
+
         case GLFW_KEY_1:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton1 = not skeleton1;
             }
             else selection = 1;
             break;
-        
+
         case GLFW_KEY_2:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton2 = not skeleton2;
             }
             else selection = 2;
             break;
-        
+
         case GLFW_KEY_3:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton3 = not skeleton3;
             }
             else selection = 3;
             break;
-        
+
         case GLFW_KEY_4:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton4 = not skeleton4;
             }
             else selection = 4;
             break;
-        
+
         case GLFW_KEY_5:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton5 = not skeleton5;
             }
             else selection = 5;
             break;
-        
+
         case GLFW_KEY_6:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton6 = not skeleton6;
             }
             else selection = 6;
             break;
-        
+
         case GLFW_KEY_7:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton7 = not skeleton7;
             }
             else selection = 7;
             break;
-        
+
         case GLFW_KEY_8:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton8 = not skeleton8;
             }
             else selection = 8;
             break;
-        
+
         case GLFW_KEY_9:
             if (mods == GLFW_MOD_CONTROL) {
                 if (action == GLFW_PRESS) skeleton9 = not skeleton9;
             }
             else selection = 9;
             break;
-        
+
         case GLFW_KEY_SPACE:
             pEye   = glm::translate(glm::mat4(),glm::vec3(5,6,5))*pSelection[selection];
             pFocus = pSelection[selection];
             break;
-        
+
         case GLFW_KEY_KP_2: // move back
             switch (action) {
                 case GLFW_PRESS:
@@ -274,7 +274,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: return;
             }
             break;
-        
+
         case GLFW_KEY_KP_4: // move left
             switch (action) {
                 case GLFW_PRESS:
@@ -283,7 +283,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: return;
             }
             break;
-        
+
         case GLFW_KEY_KP_6: // move right
             switch (action) {
                 case GLFW_PRESS:
@@ -292,7 +292,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: return;
             }
             break;
-            
+
         case GLFW_KEY_KP_8: // move forth
             switch (action) {
                 case GLFW_PRESS:
@@ -301,7 +301,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: return;
             }
             break;
-        
+
         case GLFW_KEY_KP_SUBTRACT: // move down
             switch (action) {
                 case GLFW_PRESS:
@@ -310,7 +310,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 default: return;
             }
             break;
-        
+
         case GLFW_KEY_KP_ADD: // move up
             switch (action) {
                 case GLFW_PRESS:

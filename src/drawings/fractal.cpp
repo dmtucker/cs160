@@ -50,12 +50,12 @@ void recursiveSierpinski ( const vec4 a , const vec4 b , const vec4 c , const ve
 
 
 void initSierpinski ( ) {
-    
+
     static GLuint gasketVBO = 0;
-    
+
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         recursiveSierpinski(
             vec4(0,1,0,1),
             vec4(1,0,0,1),
@@ -63,16 +63,16 @@ void initSierpinski ( ) {
             vec4(cos((2*PI)/3),0,-sin((2*PI)/3),1),
             gasketIterations
         );
-        
+
         currentShader(staticShader);
-        
+
         glGenBuffers(1,&gasketVBO);
         glBindBuffer(GL_ARRAY_BUFFER,gasketVBO);
         glBufferData(GL_ARRAY_BUFFER,sizeof(Gpoints)+sizeof(Gcolors),NULL,GL_STATIC_DRAW);
         glBufferSubData(GL_ARRAY_BUFFER,0              ,sizeof(Gpoints),Gpoints);
         glBufferSubData(GL_ARRAY_BUFFER,sizeof(Gpoints),sizeof(Gcolors),Gcolors);
         checkGL(__FILE__,__LINE__);
-        
+
         glGenVertexArrays(1,&gasketVAO);
         glBindVertexArray(gasketVAO);
         glEnableVertexAttribArray(SSVposition);
@@ -82,7 +82,7 @@ void initSierpinski ( ) {
         checkGL(__FILE__,__LINE__);
     }
     else {
-        
+
         glBindVertexArray(0);
         glDeleteVertexArrays(1,&gasketVAO);
         glDeleteBuffers(1,&gasketVBO);

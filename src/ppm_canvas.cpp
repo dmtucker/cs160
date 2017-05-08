@@ -51,7 +51,7 @@ int ppmSaveCanvas(char *filename, struct canvas_t *canvas)
     if ((fp = fopen(filename, "w")) == NULL) {
         return -1;
     }
-    
+
     width = canvas->width;
     height = canvas->height;
     size = width*height;

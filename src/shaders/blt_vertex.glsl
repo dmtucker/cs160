@@ -23,22 +23,22 @@ out vec4 vertex_color;
 out vec2 vertex_texture;
 
 void main ( ) {
-    
+
     vec4 incident_ray    = light_position-position;
     vec4 incident_normal = normalize(incident_ray);
     vec4   vertex_normal = normalize(normal);
-    
+
     vec4 ambient = light_ambient*material_ambient;
-    
+
     float Kd = max(dot(incident_normal,vertex_normal),0); // Lambert factor
     vec4 diffuse = Kd*light_diffuse*material_diffuse;
-    
+
     float Ks = pow(
         max(dot(vertex_normal,normalize(incident_normal+normalize(position))),0),
         material_shininess
     );
     vec4 specular = Ks*light_specular*material_specular;
-    
+
     gl_Position    = projection*view*model*position;
     vertex_color   = color*(ambient+diffuse+specular);
     vertex_texture = texture_coordinate;

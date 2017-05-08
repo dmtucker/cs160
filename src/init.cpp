@@ -27,14 +27,14 @@ glm::vec3
 void initGLFW ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         (void) glfwSetErrorCallback(error);
-        
+
         if (not glfwInit()) {
             fputs("GLFW Initialization Failure",stderr);
             exit(EXIT_FAILURE);
         }
-        
+
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,3);
@@ -54,7 +54,7 @@ void initGLFW ( ) {
         (void) glfwSetMouseButtonCallback(defaultWindow,click);
         (void)   glfwSetCursorPosCallback(defaultWindow,hover);
         (void)      glfwSetScrollCallback(defaultWindow,scroll);
-        
+
         printf("GLFW v%s\n",glfwGetVersionString());
     }
     else {
@@ -68,9 +68,9 @@ void initGLFW ( ) {
 void initGLEW ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         glewExperimental = GL_TRUE; //XXX < v4.0
-        
+
         GLenum status = glewInit();
         if (status != GLEW_OK) {
             fprintf(
@@ -81,7 +81,7 @@ void initGLEW ( ) {
             exit(EXIT_FAILURE);
         }
         else (void) glGetError();
-        
+
         printf("GLEW v%s\n",glewGetString(GLEW_VERSION));
     }
     uninitialized = not uninitialized;
@@ -102,22 +102,22 @@ bool checkGL ( const char * file , GLuint line , bool required = true ) {
 void initGL ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         glClearColor(0.1,0.1,0.1,1.0);
         glClearDepth(1);
-        
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-        
+
         glDisable(GL_DITHER);
-        
+
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
-        
+
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         glFrontFace(GL_CCW);
-        
+
         checkGL(__FILE__,__LINE__);
         printf("OpenGL v%s\n",glGetString(GL_VERSION));
     }

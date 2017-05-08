@@ -13,7 +13,7 @@ GLuint
 void initShader_texture ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         shaders[shader_texture] = shaderProgram(
             "src/shaders/texture_vertex.glsl",
             "src/shaders/texture_fragment.glsl"
@@ -23,7 +23,7 @@ void initShader_texture ( ) {
             exit(EXIT_FAILURE);
         }
         currentShader(shaders[shader_texture]);
-        
+
         shaderPositions[shader_texture]    = glGetAttribLocation( shaders[shader_texture],"position");
         shaderColors[shader_texture]       = glGetAttribLocation( shaders[shader_texture],"color");
         CTvTexture                         = glGetAttribLocation( shaders[shader_texture],"texture_coordinate");
@@ -31,7 +31,7 @@ void initShader_texture ( ) {
         shaderModels[shader_texture]       = glGetUniformLocation(shaders[shader_texture],"model");
         shaderViews[shader_texture]        = glGetUniformLocation(shaders[shader_texture],"view");
         shaderProjections[shader_texture]  = glGetUniformLocation(shaders[shader_texture],"projection");
-        
+
         glUniformMatrix4fv(shaderModels[shader_texture]     ,1,GL_FALSE,glm::value_ptr(glm::mat4()));
         glUniformMatrix4fv(shaderViews[shader_texture]      ,1,GL_FALSE,glm::value_ptr(glm::mat4()));
         glUniformMatrix4fv(shaderProjections[shader_texture],1,GL_FALSE,glm::value_ptr(glm::mat4()));
@@ -48,14 +48,14 @@ void initShader_texture ( ) {
 void CTobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 * points ,
                                                    glm::vec4 * colors ,
                                                    glm::vec2 * textures ) {
-    
+
     size_t offset = 0;
     size_t size_points   = sizeof(glm::vec4)*vertices;
     size_t size_colors   = sizeof(glm::vec4)*vertices;
     size_t size_textures = sizeof(glm::vec2)*vertices;
-    
+
     currentShader(shaders[shader_texture]);
-    
+
     glGenBuffers(1,&VO->VBO);
     glBindBuffer(GL_ARRAY_BUFFER,VO->VBO);
     glBufferData(
@@ -67,9 +67,9 @@ void CTobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 * points ,
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_points  ,VOID(points));         offset += size_points;
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_colors  ,VOID(colors));         offset += size_colors;
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_textures,VOID(textures));       offset += size_textures;
-    
+
     offset = 0;
-    
+
     glGenVertexArrays(1,&VO->VAO);
     glBindVertexArray(VO->VAO);
     glEnableVertexAttribArray(shaderPositions[shader_texture]);
@@ -82,10 +82,10 @@ void CTobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 * points ,
 
 
 void cleanCTobject ( GPUbuffer * VO ) {
-    
+
     glBindVertexArray(0);
     glDeleteVertexArrays(1,&VO->VAO);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER,0);
     glDeleteBuffers(1,&VO->VBO);
 }

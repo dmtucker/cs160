@@ -20,7 +20,7 @@ GLuint
 void initShader_light ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         shaders[shader_light] = shaderProgram(
             "src/shaders/light_vertex.glsl",
             "src/shaders/light_fragment.glsl"
@@ -30,7 +30,7 @@ void initShader_light ( ) {
             exit(EXIT_FAILURE);
         }
         currentShader(shaders[shader_light]);
-        
+
         shaderPositions[shader_light]   = glGetAttribLocation( shaders[shader_light],"position");
         shaderColors[shader_light]      = glGetAttribLocation( shaders[shader_light],"color");
         CLvNormal     = glGetAttribLocation( shaders[shader_light],"normal");
@@ -45,7 +45,7 @@ void initShader_light ( ) {
         shaderModels[shader_light]       = glGetUniformLocation(shaders[shader_light],"model");
         shaderViews[shader_light]        = glGetUniformLocation(shaders[shader_light],"view");
         shaderProjections[shader_light]  = glGetUniformLocation(shaders[shader_light],"projection");
-        
+
         glUniformMatrix4fv(shaderModels[shader_light]     ,1,GL_FALSE,glm::value_ptr(glm::mat4()));
         glUniformMatrix4fv(shaderViews[shader_light]      ,1,GL_FALSE,glm::value_ptr(glm::mat4()));
         glUniformMatrix4fv(shaderProjections[shader_light],1,GL_FALSE,glm::value_ptr(glm::mat4()));
@@ -61,14 +61,14 @@ void initShader_light ( ) {
 void CLobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 *  points ,
                                                    glm::vec4 *  colors ,
                                                    glm::vec4 * normals ) {
-    
+
     size_t offset = 0;
     size_t size_points  = sizeof(glm::vec4)*vertices;
     size_t size_colors  = sizeof(glm::vec4)*vertices;
     size_t size_normals = sizeof(glm::vec4)*vertices;
-    
+
     currentShader(shaders[shader_light]);
-    
+
     glGenBuffers(1,&VO->VBO);
     glBindBuffer(GL_ARRAY_BUFFER,VO->VBO);
     glBufferData(
@@ -80,9 +80,9 @@ void CLobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 *  points ,
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_points ,VOID(points));          offset += size_points;
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_colors ,VOID(colors));          offset += size_colors;
     glBufferSubData(GL_ARRAY_BUFFER,offset,size_normals,VOID(normals));         offset += size_normals;
-    
+
     offset = 0;
-    
+
     glGenVertexArrays(1,&VO->VAO);
     glBindVertexArray(VO->VAO);
     glEnableVertexAttribArray(shaderPositions[shader_light]);
@@ -95,10 +95,10 @@ void CLobject ( GPUbuffer * VO , GLuint vertices , glm::vec4 *  points ,
 
 
 void cleanCLobject ( GPUbuffer * VO ) {
-    
+
     glBindVertexArray(0);
     glDeleteVertexArrays(1,&VO->VAO);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER,0);
     glDeleteBuffers(1,&VO->VBO);
 }

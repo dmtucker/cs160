@@ -4,12 +4,12 @@ GLuint RGBcubeVAO = 0, BGRcubeVAO = 0;
 
 
 void initRGBcube ( ) {
-    
+
     static GLuint RGBcubeVBO = 0;
-    
+
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         const vec4 vCube[8] = {
             vec4(0,0,0,1), // left  lower back
             vec4(0,0,1,1), // left  lower front
@@ -38,37 +38,37 @@ void initRGBcube ( ) {
             palette[BASIC_YELLOW],
             palette[BASIC_WHITE]
         };
-        
+
         vec4 points[36], colors[36];
         unsigned int p = 0;
         for (int i = 0; i < 6 ;++i) {
             points[p] = vCube[iCube[i][0]];
             colors[p] = cCube[iCube[i][0]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][1]];
             colors[p] = cCube[iCube[i][1]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][2]];
             colors[p] = cCube[iCube[i][2]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][0]];
             colors[p] = cCube[iCube[i][0]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][2]];
             colors[p] = cCube[iCube[i][2]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][3]];
             colors[p] = cCube[iCube[i][3]];
             ++p;
         }
-        
+
         currentShader(Cshader);
-        
+
         size_t offset = 0;
         glGenBuffers(1,&RGBcubeVBO);
         glBindBuffer(GL_ARRAY_BUFFER,RGBcubeVBO);
@@ -79,7 +79,7 @@ void initRGBcube ( ) {
         );
         glBufferSubData(GL_ARRAY_BUFFER,offset,sizeof(points),points);          offset += sizeof(points);
         glBufferSubData(GL_ARRAY_BUFFER,offset,sizeof(colors),colors);          offset += sizeof(colors);
-        
+
         offset = 0;
         glGenVertexArrays(1,&RGBcubeVAO);
         glBindVertexArray(RGBcubeVAO);
@@ -98,12 +98,12 @@ void initRGBcube ( ) {
 
 
 void initBGRcube ( ) {
-    
+
     static GLuint BGRcubeVBO = 0;
-    
+
     static bool uninitialized = true;
     if (uninitialized) {
-        
+
         const vec4 vCube[8] = {
             vec4( 0,0,0,1), // right lower back
             vec4( 0,0,1,1), // right lower front
@@ -132,44 +132,44 @@ void initBGRcube ( ) {
             palette[BASIC_YELLOW],
             palette[BASIC_WHITE]
         };
-        
+
         vec4 points[36], colors[36];
         unsigned int p = 0;
         for (int i = 0; i < 6 ;++i) {
             points[p] = vCube[iCube[i][0]];
             colors[p] = cCube[iCube[i][0]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][1]];
             colors[p] = cCube[iCube[i][1]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][2]];
             colors[p] = cCube[iCube[i][2]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][0]];
             colors[p] = cCube[iCube[i][0]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][2]];
             colors[p] = cCube[iCube[i][2]];
             ++p;
-            
+
             points[p] = vCube[iCube[i][3]];
             colors[p] = cCube[iCube[i][3]];
             ++p;
         }
-        
+
         currentShader(Cshader);
-        
+
         glGenBuffers(1,&BGRcubeVBO);
         glBindBuffer(GL_ARRAY_BUFFER,BGRcubeVBO);
         glBufferData(GL_ARRAY_BUFFER,sizeof(points)+sizeof(colors),NULL,GL_STATIC_DRAW);
         glBufferSubData(GL_ARRAY_BUFFER,0             ,sizeof(points),points);
         glBufferSubData(GL_ARRAY_BUFFER,sizeof(points),sizeof(colors),colors);
         checkGL(__FILE__,__LINE__);
-        
+
         glGenVertexArrays(1,&BGRcubeVAO);
         glBindVertexArray(BGRcubeVAO);
         glEnableVertexAttribArray(CvPosition);
