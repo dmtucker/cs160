@@ -8,5 +8,5 @@ An OpenGL Sandbox
 sudo apt-get update
 sudo apt-get install -y g++ libglew-dev libglfw3-dev libglm-dev make
 make all
-bin/main src/canvases/lab3/map.ppm src/canvases/lab3/skin.ppm
+bin/main canvases/lab3/map.ppm canvases/lab3/skin.ppm
 ```
