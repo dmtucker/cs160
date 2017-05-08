@@ -8,7 +8,7 @@
                           : glm::ortho(-FAR/10,FAR/10,-FAR/10,FAR/10,0.1f,FAR)
 
 GLfloat
-    lens = 60,
+    lens = rad(60),
     zoom = 1;
 
 bool lighting = true;
@@ -72,7 +72,7 @@ void reorient ( ) {
     pFocus = vForward+pEye;
     
     glm::mat4 orbit = glm::mat4();
-    const GLfloat velocity = 3.5;
+    const GLfloat velocity = rad(3.5);
     if (orbitCW xor orbitCCW) orbit = (orbitCCW) ?
                   glm::rotate(orbit, velocity,glm::vec3(vUp)):
                   glm::rotate(orbit,-velocity,glm::vec3(vUp));
@@ -93,7 +93,7 @@ void reorient ( ) {
     pFocus = position*pFocus;
     
     glm::mat4 attention = glm::mat4();
-    const GLfloat sensitivity = 4;
+    const GLfloat sensitivity = rad(4);
     if (lookL xor lookR) attention = (lookL) ?
              glm::rotate(attention, sensitivity,glm::vec3(vUp)):
              glm::rotate(attention,-sensitivity,glm::vec3(vUp));

@@ -44,7 +44,7 @@ void drawTitle ( ) {
         (int) pCursor.x, (int) pCursor.y,
         (int) round(FPS),
         (int) round(zoom*100.0),
-        (int) round(lens),
+        (int) round(deg(lens)),
         (cull) ? "culled" : "unculled",
         (wire) ?   "wire" : "solid",
         selection
