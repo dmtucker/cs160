@@ -39,7 +39,7 @@ void initFrame ( ) {
 void drawTitle ( ) {
     sprintf(
         &title[0],
-        "%dx%d (%d,%d) | %d FPS | %d%% | %d FOV | %s %s | %d",
+        "%dx%d (%d,%d) | %d FPS | %d%% | %d° FOV | %s %s | %d",
         (int) windowW,   (int) windowH,
         (int) pCursor.x, (int) pCursor.y,
         (int) round(FPS),
