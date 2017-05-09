@@ -61,15 +61,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 putchar('\n');
                 puts("Selections");
                 puts("0           light source");
-                puts("1           skeleton 1");
-                puts("2           skeleton 2");
-                puts("3           skeleton 3");
-                puts("4           skeleton 4");
-                puts("5           skeleton 5");
-                puts("6           skeleton 6");
-                puts("7           skeleton 7");
-                puts("8           skeleton 8");
-                puts("9           skeleton 9");
+                puts("1           skeleton");
                 putchar('\n');
                 puts("Controls");
                 puts("ctrl-scroll adjust FOV");
@@ -85,7 +77,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
             break;
 
         case GLFW_KEY_P:
-            if (mods == GLFW_MOD_CONTROL and action == GLFW_PRESS) skeletonPlay[selection] = not skeletonPlay[selection];
+            if (mods == GLFW_MOD_CONTROL and action == GLFW_PRESS) skeletonPlay = not skeletonPlay;
             break;
 
         case GLFW_KEY_Q: // quit
@@ -200,65 +192,9 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
 
         case GLFW_KEY_1:
             if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton1 = not skeleton1;
+                if (action == GLFW_PRESS) skeleton = not skeleton;
             }
             else selection = 1;
-            break;
-
-        case GLFW_KEY_2:
-            if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton2 = not skeleton2;
-            }
-            else selection = 2;
-            break;
-
-        case GLFW_KEY_3:
-            if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton3 = not skeleton3;
-            }
-            else selection = 3;
-            break;
-
-        case GLFW_KEY_4:
-            if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton4 = not skeleton4;
-            }
-            else selection = 4;
-            break;
-
-        case GLFW_KEY_5:
-            if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton5 = not skeleton5;
-            }
-            else selection = 5;
-            break;
-
-        case GLFW_KEY_6:
-            if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton6 = not skeleton6;
-            }
-            else selection = 6;
-            break;
-
-        case GLFW_KEY_7:
-            if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton7 = not skeleton7;
-            }
-            else selection = 7;
-            break;
-
-        case GLFW_KEY_8:
-            if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton8 = not skeleton8;
-            }
-            else selection = 8;
-            break;
-
-        case GLFW_KEY_9:
-            if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton9 = not skeleton9;
-            }
-            else selection = 9;
             break;
 
         case GLFW_KEY_SPACE:

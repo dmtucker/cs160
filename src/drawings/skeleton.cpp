@@ -27,32 +27,32 @@ bone_t
 #define    TIBIA_SCALE 0.75
 
 #define SKELETON_NECK                 glm::translate(skeletonTorso.model,glm::vec3(0,TORSO_SCALE,0))
-#define SKELETON_COLLAR(    deg,axis) glm::rotate(SKELETON_NECK,deg,axis)
+#define SKELETON_COLLAR(    rad,axis) glm::rotate(SKELETON_NECK,rad,axis)
 #define SKELETON_SHOULDER(m)          glm::translate(m,glm::vec3(0,CLAVICLE_SCALE,0))
-#define SKELETON_BICEP(   m,deg,axis) glm::rotate(SKELETON_SHOULDER(m),deg,axis)
+#define SKELETON_BICEP(   m,rad,axis) glm::rotate(SKELETON_SHOULDER(m),rad,axis)
 #define SKELETON_ELBOW(   m         ) glm::translate(m,glm::vec3(0,HUMERUS_SCALE,0))
-#define SKELETON_FOREARM( m,deg,axis) glm::rotate(SKELETON_ELBOW(m),deg,axis)
+#define SKELETON_FOREARM( m,rad,axis) glm::rotate(SKELETON_ELBOW(m),rad,axis)
 #define SKELETON_CROTCH               skeletonTorso.model
-#define SKELETON_WAIST(     deg,axis) glm::rotate(SKELETON_CROTCH,deg,axis)
+#define SKELETON_WAIST(     rad,axis) glm::rotate(SKELETON_CROTCH,rad,axis)
 #define SKELETON_HIP(     m         ) glm::translate(m,glm::vec3(0,PELVIS_SCALE,0))
-#define SKELETON_QUAD(    m,deg,axis) glm::rotate(SKELETON_HIP(m),deg,axis)
+#define SKELETON_QUAD(    m,rad,axis) glm::rotate(SKELETON_HIP(m),rad,axis)
 #define SKELETON_KNEE(    m         ) glm::translate(m,glm::vec3(0,FEMUR_SCALE,0))
-#define SKELETON_CALF(    m,deg,axis) glm::rotate(SKELETON_KNEE(m),deg,axis)
+#define SKELETON_CALF(    m,rad,axis) glm::rotate(SKELETON_KNEE(m),rad,axis)
 
 GLfloat
-    skeletonRshrug   =  90,
-    skeletonRflex    =  45,
-    skeletonRsqueeze =  45,
-    skeletonLshrug   = -90,
-    skeletonLflex    = -45,
-    skeletonLsqueeze = -45,
-    skeletonBooty    =  90,
-    skeletonRlunge   =  75,
-    skeletonRkick    =  15,
-    skeletonLlunge   = -75,
-    skeletonLkick    = -15;
+    skeletonRshrug   = rad( 90),
+    skeletonRflex    = rad( 45),
+    skeletonRsqueeze = rad( 45),
+    skeletonLshrug   = rad(-90),
+    skeletonLflex    = rad(-45),
+    skeletonLsqueeze = rad(-45),
+    skeletonBooty    = rad( 90),
+    skeletonRlunge   = rad( 75),
+    skeletonRkick    = rad( 15),
+    skeletonLlunge   = rad(-75),
+    skeletonLkick    = rad(-15);
 
-bool skeletonPlay[10];
+bool skeletonPlay = false;
 
 
 void drawBone ( glm::mat4 model = glm::mat4() ){
@@ -177,7 +177,7 @@ void buildLleg ( ) {
 
     skeletonLpelvis.model = glm::mat4();
     skeletonLpelvis.draw  = [](){
-        skeletonLpelvis.model = SKELETON_WAIST(skeletonBooty-180,glm::vec3(AXIS_Z));
+        skeletonLpelvis.model = SKELETON_WAIST((GLfloat) (skeletonBooty-rad(180)),glm::vec3(AXIS_Z));
         drawBone(glm::scale(
             skeletonLpelvis.model,
             glm::vec3(PELVIS_SCALE,PELVIS_SCALE,PELVIS_SCALE)
@@ -243,7 +243,6 @@ void initSkeleton ( ) {
         glm::vec4 * const points = new glm::vec4[2];
         glm::vec4 * const colors = new glm::vec4[2];
 
-        for (int i=0; i < 10 ;++i) { skeletonPlay[i] = false; }
         buildSkeleton();
         points[0] = AXIS_ORIGIN;        colors[0] = palette[BASIC_WHITE];
         points[1] = glm::vec4(0,1,0,1); colors[1] = palette[BASIC_WHITE];
@@ -272,7 +271,7 @@ void recursiveSkeleton ( bone_t * root ) {
 }
 
 
-void drawSkeleton ( GLuint selected , glm::mat4 model = glm::mat4() ) {
+void drawSkeleton ( glm::mat4 model = glm::mat4() ) {
 
     currentShader(Cshader);
     glBindVertexArray(boneBuffer.VAO);
@@ -297,20 +296,20 @@ void drawSkeleton ( GLuint selected , glm::mat4 model = glm::mat4() ) {
 //    if (pSkeleton.z <  0)              pSkeleton.z = 0;
 //    if (pSkeleton.z >= terrain.height) pSkeleton.z = terrain.height-1;
 
-    if (skeletonPlay[selected]) {
+    if (skeletonPlay) {
 
         GLfloat variation = sin(rad(glfwGetTime()*300));
 
-        skeletonRshrug    =  (variation*  5)+90,
-        skeletonRflex     =  (variation* 80),
-        skeletonRsqueeze  =  (variation* 10),
-        skeletonLshrug    =  (variation*- 5)-90,
-        skeletonLflex     =  (variation*-80),
-        skeletonLsqueeze  =  (variation*-10),
-        skeletonRlunge    =  (variation* 15)+75,
-        skeletonRkick     =  (variation*- 5)+ 5,
-        skeletonLlunge    =  (variation*-15)-75,
-        skeletonLkick     =  (variation*  5)- 5;
+        skeletonRshrug    =  (variation*rad(  5))+rad(90),
+        skeletonRflex     =  (variation*rad( 80)),
+        skeletonRsqueeze  =  (variation*rad( 10)),
+        skeletonLshrug    =  (variation*rad(- 5))-rad(90),
+        skeletonLflex     =  (variation*rad(-80)),
+        skeletonLsqueeze  =  (variation*rad(-10)),
+        skeletonRlunge    =  (variation*rad( 15))+rad(75),
+        skeletonRkick     =  (variation*rad(- 5))+rad( 5),
+        skeletonLlunge    =  (variation*rad(-15))-rad(75),
+        skeletonLkick     =  (variation*rad(  5))-rad( 5);
     }
 
     recursiveSkeleton(&skeletonTorso);
