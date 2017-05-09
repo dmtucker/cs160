@@ -69,8 +69,6 @@ void initGLEW ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
 
-        glewExperimental = GL_TRUE; //XXX < v4.0
-
         GLenum status = glewInit();
         if (status != GLEW_OK) {
             fprintf(
