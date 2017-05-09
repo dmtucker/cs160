@@ -72,14 +72,14 @@ void reorient ( ) {
     pFocus = vForward+pEye;
 
     glm::mat4 orbit = glm::mat4();
-    const GLfloat velocity = rad(3.5);
+    const GLfloat velocity = rad(3.0);
     if (orbitCW xor orbitCCW) orbit = (orbitCCW) ?
                   glm::rotate(orbit, velocity,glm::vec3(vUp)):
                   glm::rotate(orbit,-velocity,glm::vec3(vUp));
     pEye = orbit*pEye;
 
     glm::mat4 position = glm::mat4();
-    const GLfloat agility = 2.0;
+    const GLfloat agility = 3.0;
     if (moveL xor moveR) position = (moveR) ?
           glm::translate(position,glm::vec3( vRight  *agility)):
           glm::translate(position,glm::vec3(-vRight  *agility));
@@ -93,7 +93,7 @@ void reorient ( ) {
     pFocus = position*pFocus;
 
     glm::mat4 attention = glm::mat4();
-    const GLfloat sensitivity = rad(4);
+    const GLfloat sensitivity = rad(3);
     if (lookL xor lookR) attention = (lookL) ?
              glm::rotate(attention, sensitivity,glm::vec3(vUp)):
              glm::rotate(attention,-sensitivity,glm::vec3(vUp));
