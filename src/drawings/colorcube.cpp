@@ -10,15 +10,15 @@ void initRGBcube ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
 
-        const vec4 vCube[8] = {
-            vec4(0,0,0,1), // left  lower back
-            vec4(0,0,1,1), // left  lower front
-            vec4(0,1,0,1), // left  upper back
-            vec4(0,1,1,1), // left  upper front
-            vec4(1,0,0,1), // right lower back
-            vec4(1,0,1,1), // right lower front
-            vec4(1,1,0,1), // right upper back
-            vec4(1,1,1,1)  // right upper front
+        const glm::vec4 vCube[8] = {
+            glm::vec4(0,0,0,1), // left  lower back
+            glm::vec4(0,0,1,1), // left  lower front
+            glm::vec4(0,1,0,1), // left  upper back
+            glm::vec4(0,1,1,1), // left  upper front
+            glm::vec4(1,0,0,1), // right lower back
+            glm::vec4(1,0,1,1), // right lower front
+            glm::vec4(1,1,0,1), // right upper back
+            glm::vec4(1,1,1,1)  // right upper front
         };
         const unsigned int iCube[6][4] = {
             {0,2,6,4}, // back
@@ -28,7 +28,7 @@ void initRGBcube ( ) {
             {4,6,7,5}, // right
             {5,7,3,1}  // front
         };
-        const vec4 cCube[8] = {
+        const glm::vec4 cCube[8] = {
             palette[BASIC_BLACK],
             palette[BASIC_BLUE],
             palette[BASIC_GREEN],
@@ -39,7 +39,7 @@ void initRGBcube ( ) {
             palette[BASIC_WHITE]
         };
 
-        vec4 points[36], colors[36];
+        glm::vec4 points[36], colors[36];
         unsigned int p = 0;
         for (int i = 0; i < 6 ;++i) {
             points[p] = vCube[iCube[i][0]];
@@ -104,15 +104,15 @@ void initBGRcube ( ) {
     static bool uninitialized = true;
     if (uninitialized) {
 
-        const vec4 vCube[8] = {
-            vec4( 0,0,0,1), // right lower back
-            vec4( 0,0,1,1), // right lower front
-            vec4( 0,1,0,1), // right upper back
-            vec4( 0,1,1,1), // right upper front
-            vec4(-1,0,0,1), // left  lower back
-            vec4(-1,0,1,1), // left  lower front
-            vec4(-1,1,0,1), // left  upper back
-            vec4(-1,1,1,1)  // left  upper front
+        const glm::vec4 vCube[8] = {
+            glm::vec4( 0,0,0,1), // right lower back
+            glm::vec4( 0,0,1,1), // right lower front
+            glm::vec4( 0,1,0,1), // right upper back
+            glm::vec4( 0,1,1,1), // right upper front
+            glm::vec4(-1,0,0,1), // left  lower back
+            glm::vec4(-1,0,1,1), // left  lower front
+            glm::vec4(-1,1,0,1), // left  upper back
+            glm::vec4(-1,1,1,1)  // left  upper front
         };
         const unsigned int iCube[6][4] = {
             {4,6,2,0}, // back
@@ -122,7 +122,7 @@ void initBGRcube ( ) {
             {5,7,6,4}, // right
             {1,3,7,5}  // front
         };
-        const vec4 cCube[8] = {
+        const glm::vec4 cCube[8] = {
             palette[BASIC_BLACK],
             palette[BASIC_BLUE],
             palette[BASIC_GREEN],
@@ -133,7 +133,7 @@ void initBGRcube ( ) {
             palette[BASIC_WHITE]
         };
 
-        vec4 points[36], colors[36];
+        glm::vec4 points[36], colors[36];
         unsigned int p = 0;
         for (int i = 0; i < 6 ;++i) {
             points[p] = vCube[iCube[i][0]];
@@ -202,36 +202,36 @@ void initColorcube ( ) {
 }
 
 
-void drawRGBcube ( mat4 model = mat4() ) {
+void drawRGBcube ( glm::mat4 model = glm::mat4() ) {
     currentShader(Cshader);
     glBindVertexArray(RGBcubeVAO);
-    glUniformMatrix4fv(SSmodel,1,GL_FALSE,value_ptr(model));
+    glUniformMatrix4fv(Cmodel,1,GL_FALSE,value_ptr(model));
     glDrawArrays(GL_TRIANGLES,0,36);
 }
 
 
-void drawBGRcube ( mat4 model = mat4() ) {
+void drawBGRcube ( glm::mat4 model = glm::mat4() ) {
     currentShader(Cshader);
     glBindVertexArray(BGRcubeVAO);
-    glUniformMatrix4fv(SSmodel,1,GL_FALSE,value_ptr(model));
+    glUniformMatrix4fv(Cmodel,1,GL_FALSE,value_ptr(model));
     glDrawArrays(GL_TRIANGLES,0,36);
 }
 
 
-void drawColorcube ( mat4 model = mat4() ) {
-    mat4 b, a = mat4();
+void drawColorcube ( glm::mat4 model = glm::mat4() ) {
+    glm::mat4 b, a = glm::mat4();
     b = model*a;
     drawRGBcube(b);
     drawBGRcube(b);
-    a = rotate(a,180.0f,vec3(0,1,0));
+    a = rotate(a,(GLfloat) rad(180.0f),glm::vec3(0,1,0));
     b = model*a;
     drawRGBcube(b);
     drawBGRcube(b);
-    a = rotate(a,180.0f,vec3(1,0,0));
+    a = rotate(a,(GLfloat) rad(180.0f),glm::vec3(1,0,0));
     b = model*a;
     drawRGBcube(b);
     drawBGRcube(b);
-    a = rotate(a,180.0f,vec3(0,1,0));
+    a = rotate(a,(GLfloat) rad(180.0f),glm::vec3(0,1,0));
     b = model*a;
     drawRGBcube(b);
     drawBGRcube(b);

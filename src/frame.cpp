@@ -3,8 +3,8 @@
 #include "drawings/terrain.cpp"
 #include "drawings/skeleton.cpp"
 
-//#include "drawings/colorcube.cpp" //XXX
-//#include "drawings/fractal.cpp" //XXX
+#include "drawings/colorcube.cpp"
+//#include "drawings/fractal.cpp"
 
 
 void initFrame ( ) {
@@ -15,18 +15,15 @@ void initFrame ( ) {
         initSphere();
         initTerrain();
         initSkeleton();
-
-//        initColorcube(); //XXX
-//        initSierpinski(); //XXX
+        initColorcube();
+        //initSierpinski();
 
         pEye   = glm::vec4(terrain.width/2,200,terrain.height/2,1);
         pFocus = AXIS_ORIGIN;
     }
     else {
-
-//        initSierpinski(); //XXX
-//        initColorcube(); //XXX
-
+        //initSierpinski();
+        initColorcube();
         initSkeleton();
         initTerrain();
         initSphere();
@@ -52,16 +49,18 @@ void drawTitle ( ) {
     glfwSetWindowTitle(defaultWindow,&title[0]);
 }
 
+// TODO These probably shouldn't live here.
 bool skeleton = false;
+bool colorcube = false;
 
 void drawFrame ( ) {
+
+    GLfloat s = 10;
 
                   drawCartesian();
                   drawTerrain  ();
     if (lighting) drawSphere   (glm::translate(glm::mat4(),glm::vec3(pSelection[0])));
     if (skeleton) drawSkeleton (glm::translate(glm::mat4(),glm::vec3(pSelection[1])));
-
-//    GLfloat s = 10;
-//     drawColorcube(scale(mat4(),vec3(s,s,s))); //XXX
-//    drawSierpinski(scale(mat4(),vec3(s,s,s))); //XXX
+    if (colorcube) drawColorcube(glm::scale(glm::mat4(), glm::vec3(s, s, s)));
+    //if (sierpinski) drawSierpinski(scale(mat4(),vec3(s,s,s)));
 }

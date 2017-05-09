@@ -62,6 +62,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 puts("Selections");
                 puts("0           light source");
                 puts("1           skeleton");
+                puts("2           colorcube");
                 putchar('\n');
                 puts("Controls");
                 puts("ctrl-scroll adjust FOV");
@@ -195,6 +196,13 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 if (action == GLFW_PRESS) skeleton = not skeleton;
             }
             else selection = 1;
+            break;
+
+        case GLFW_KEY_2:
+            if (mods == GLFW_MOD_CONTROL) {
+                if (action == GLFW_PRESS) colorcube = not colorcube;
+            }
+            else selection = 2;
             break;
 
         case GLFW_KEY_SPACE:
