@@ -5,10 +5,10 @@ const unsigned int gasketTriangles  = pow(4,gasketIterations+1);
 
 GLuint gasketVAO   = 0;
 
-vec4 Gpoints[gasketTriangles*3], Gcolors[gasketTriangles*3]; //XXX Pass these from initSierpinski to recursiveSierpinski for the bottom level of recursion.
+glm::vec4 Gpoints[gasketTriangles*3], Gcolors[gasketTriangles*3]; //XXX Pass these from initSierpinski to recursiveSierpinski for the bottom level of recursion.
 
 
-void initGasketTriangle ( const vec4 a , const vec4 b , const vec4 c ) { //XXX Integrate this into recursiveSierpinski.
+void initGasketTriangle ( const glm::vec4 a , const glm::vec4 b , const glm::vec4 c ) { //XXX Integrate this into recursiveSierpinski.
     static unsigned int i = 0;
     Gpoints[i] = a;
     Gcolors[i] = palette[brushColor];
@@ -22,15 +22,15 @@ void initGasketTriangle ( const vec4 a , const vec4 b , const vec4 c ) { //XXX I
 }
 
 
-void recursiveSierpinski ( const vec4 a , const vec4 b , const vec4 c , const vec4 d , int level ) {
+void recursiveSierpinski ( const glm::vec4 a , const glm::vec4 b , const glm::vec4 c , const glm::vec4 d , int level ) {
     if (level > 0) {
-        vec4 m[6];
-        m[0] = (a+b)/2.0;
-        m[1] = (a+c)/2.0;
-        m[2] = (b+c)/2.0;
-        m[3] = (a+d)/2.0;
-        m[4] = (b+d)/2.0;
-        m[5] = (c+d)/2.0;
+        glm::vec4 m[6];
+        m[0] = (a+b)/glm::vec4(2.0);
+        m[1] = (a+c)/glm::vec4(2.0);
+        m[2] = (b+c)/glm::vec4(2.0);
+        m[3] = (a+d)/glm::vec4(2.0);
+        m[4] = (b+d)/glm::vec4(2.0);
+        m[5] = (c+d)/glm::vec4(2.0);
         recursiveSierpinski(a   ,m[0],m[1],m[3],level-1);
         recursiveSierpinski(m[0],b   ,m[2],m[4],level-1);
         recursiveSierpinski(m[1],m[2],c   ,m[5],level-1);
@@ -57,14 +57,14 @@ void initSierpinski ( ) {
     if (uninitialized) {
 
         recursiveSierpinski(
-            vec4(0,1,0,1),
-            vec4(1,0,0,1),
-            vec4(cos((4*PI)/3),0,-sin((4*PI)/3),1),
-            vec4(cos((2*PI)/3),0,-sin((2*PI)/3),1),
+            glm::vec4(0,1,0,1),
+            glm::vec4(1,0,0,1),
+            glm::vec4(cos((4*PI)/3),0,-sin((4*PI)/3),1),
+            glm::vec4(cos((2*PI)/3),0,-sin((2*PI)/3),1),
             gasketIterations
         );
 
-        currentShader(staticShader);
+        currentShader(Cshader);
 
         glGenBuffers(1,&gasketVBO);
         glBindBuffer(GL_ARRAY_BUFFER,gasketVBO);
@@ -75,10 +75,10 @@ void initSierpinski ( ) {
 
         glGenVertexArrays(1,&gasketVAO);
         glBindVertexArray(gasketVAO);
-        glEnableVertexAttribArray(SSVposition);
-        glEnableVertexAttribArray(SSVcolor);
-        glVertexAttribPointer(SSVposition,4,GL_FLOAT,GL_FALSE,0,VOID(0));
-        glVertexAttribPointer(SSVcolor,4,GL_FLOAT,GL_FALSE,0,VOID(sizeof(Gpoints)));
+        glEnableVertexAttribArray(CvPosition);
+        glEnableVertexAttribArray(CvColor);
+        glVertexAttribPointer(CvPosition,4,GL_FLOAT,GL_FALSE,0,VOID(0));
+        glVertexAttribPointer(CvColor,4,GL_FLOAT,GL_FALSE,0,VOID(sizeof(Gpoints)));
         checkGL(__FILE__,__LINE__);
     }
     else {
@@ -92,10 +92,10 @@ void initSierpinski ( ) {
 }
 
 
-void drawSierpinski ( mat4 model = mat4() ) {
-    currentShader(staticShader);
+void drawSierpinski ( glm::mat4 model = glm::mat4() ) {
+    currentShader(Cshader);
     glBindVertexArray(gasketVAO);
-    glUniformMatrix4fv(SSmodel,1,GL_FALSE,value_ptr(model));
+    glUniformMatrix4fv(Cmodel,1,GL_FALSE,value_ptr(model));
     glDrawArrays(GL_TRIANGLES,0,gasketTriangles*3);
     checkGL(__FILE__,__LINE__);
 }
