@@ -31,7 +31,7 @@ bool
     selectionMoveB[10], // back
     selectionMoveF[10]; // forth
 
-GLuint selection = 1;
+GLuint selection = 0;
 glm::vec4 pSelection[10];
 
 
