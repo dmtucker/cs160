@@ -344,7 +344,7 @@ static void hover ( GLFWwindow * window , double xpos , double ypos ) {
 static void scroll ( GLFWwindow * window , double xoffset , double yoffset ) {
     if (glfwGetKey(window,GLFW_KEY_LEFT_CONTROL)  == GLFW_PRESS
     or  glfwGetKey(window,GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS) {
-        const GLfloat s = 1.0;
+        const GLfloat s = rad(1.0);
              if (yoffset > 0) lens -= s;
         else if (yoffset < 0) lens += s;
     }
