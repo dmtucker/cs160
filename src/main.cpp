@@ -48,7 +48,7 @@ int main ( int argc , char * argv[] ) {
 
         glfwGetWindowPos (defaultWindow,&windowX,&windowY);
         glfwGetWindowSize(defaultWindow,&windowW,&windowH);
-        //checkGL(__FILE__,__LINE__);
+        checkGL(__FILE__,__LINE__);
 
         if (FPS <= MAX_FPS) {
 
