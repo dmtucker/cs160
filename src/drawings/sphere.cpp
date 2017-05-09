@@ -17,9 +17,9 @@ void recursiveIconosphereQuadrant ( glm::vec4 a ,
     if (level > 0) {
 
         glm::vec4 m[3];
-        m[0] = (a+b)/2.0;
-        m[1] = (a+c)/2.0;
-        m[2] = (b+c)/2.0;
+        m[0] = (a+b)/glm::vec4(2.0);
+        m[1] = (a+c)/glm::vec4(2.0);
+        m[2] = (b+c)/glm::vec4(2.0);
 
         for (GLuint i=0 ; i < 3 ;++i) {
             if (SPHERE_SOURCE) {
