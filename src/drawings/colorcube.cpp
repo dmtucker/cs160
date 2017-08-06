@@ -1,5 +1,6 @@
 //XXX Deploy IBOs!
 
+bool colorcube = false;
 GLuint RGBcubeVAO = 0, BGRcubeVAO = 0;
 
 

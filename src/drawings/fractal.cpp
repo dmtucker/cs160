@@ -3,6 +3,7 @@
 const unsigned int gasketIterations = 4;
 const unsigned int gasketTriangles  = pow(4,gasketIterations+1);
 
+bool sierpinski = false;
 GLuint gasketVAO   = 0;
 
 glm::vec4 Gpoints[gasketTriangles*3], Gcolors[gasketTriangles*3]; //XXX Pass these from initSierpinski to recursiveSierpinski for the bottom level of recursion.
