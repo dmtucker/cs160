@@ -12,7 +12,6 @@
 #include "ppm_canvas.h" //XXX
 #include "stb_image.c"
 
-// David Tucker <dmtucker@ucsc.edu> ////////////////////////////////////////////
 
 #define CHECKPOINT fprintf(stderr,"%s:%d CHECKPOINT\n",__FILE__,__LINE__);\
                    checkGL(__FILE__,__LINE__);
