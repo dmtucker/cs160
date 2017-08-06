@@ -54,27 +54,27 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
             if (action == GLFW_PRESS) {
                 putchar('\n');
                 puts("Navigation");
-                puts("arrows      look around");
-                puts("scroll      zoom");
-                puts("a,d,s,w     move camera");
-                puts("keypad      move selection");
+                puts("arrows                look around");
+                puts("scroll                zoom");
+                puts("a,d,s,w,PgUp,PgDn     move camera");
+                puts("keypad                move selection");
                 putchar('\n');
                 puts("Selections");
-                puts("0           light source");
-                puts("1           skeleton");
-                puts("2           colorcube");
-                puts("3           sierpinski tetrahedron");
+                puts("0                     light source");
+                puts("1                     skeleton");
+                puts("2                     colorcube");
+                puts("3                     sierpinski tetrahedron");
                 putchar('\n');
                 puts("Controls");
                 puts("ctrl-scroll adjust FOV");
-                puts("ctrl-#      toggle selection");
-                puts("ctrl-a      toggle axis");
-                puts("ctrl-c      toggle culling");
-                puts("ctrl-g      toggle grid");
-                puts("ctrl-h      help");
-                puts("ctrl-p      animate selection");
-                puts("ctrl-q      quit");
-                puts("ctrl-w      toggle wireframe");
+                puts("ctrl-#                toggle selection");
+                puts("ctrl-a                toggle axis");
+                puts("ctrl-c                toggle culling");
+                puts("ctrl-g                toggle grid");
+                puts("ctrl-h                help");
+                puts("ctrl-p                animate selection");
+                puts("ctrl-q                quit");
+                puts("ctrl-w                toggle wireframe");
             }
             break;
 
