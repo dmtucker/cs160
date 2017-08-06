@@ -48,10 +48,6 @@ void drawTitle ( ) {
     glfwSetWindowTitle(defaultWindow,&title[0]);
 }
 
-// TODO These probably shouldn't live here.
-bool skeleton = false;
-bool colorcube = false;
-bool sierpinski = false;
 
 void drawFrame ( ) {
 

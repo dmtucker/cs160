@@ -1,3 +1,4 @@
+bool skeleton = false;
 GPUbuffer boneBuffer;
 
 typedef struct bone_t {
