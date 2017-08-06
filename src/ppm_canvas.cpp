@@ -14,7 +14,7 @@
 int ppmLoadCanvas(char *filename, struct canvas_t *canvas)
 {
     FILE *fp;
-    int width, height, size,  i;
+    int width, height, size, i;
     pixel_t *buf;
 
     if ((fp = fopen(filename, "rb")) == NULL) {
@@ -44,8 +44,8 @@ int ppmLoadCanvas(char *filename, struct canvas_t *canvas)
 int ppmSaveCanvas(char *filename, struct canvas_t *canvas)
 {
     FILE *fp;
-    int width, height, size,  i;
-        pixel_t *buf;
+    int width, height, size, i;
+    pixel_t *buf;
     char data[1];
 
     if ((fp = fopen(filename, "w")) == NULL) {
@@ -54,7 +54,7 @@ int ppmSaveCanvas(char *filename, struct canvas_t *canvas)
 
     width = canvas->width;
     height = canvas->height;
-    size = width*height;
+    size = width * height;
     fprintf(fp, "P6\n");
     fprintf(fp, "# Comment Line\n");
     fprintf(fp, "%d %d\n", width, height);
@@ -62,12 +62,12 @@ int ppmSaveCanvas(char *filename, struct canvas_t *canvas)
 
     buf = canvas->pixels;
     for (i = 0; i < size; i++, buf++) {
-    data[0] = (*buf) & 0xff;
-    fwrite(data, 1, 1, fp);
-    data[0] = ((*buf) >> 8) & 0xff;
-    fwrite(data, 1, 1, fp);
-    data[0] = ((*buf) >> 16) & 0xff;
-    fwrite(data, 1, 1, fp);
+        data[0] = (*buf) & 0xff;
+        fwrite(data, 1, 1, fp);
+        data[0] = ((*buf) >> 8) & 0xff;
+        fwrite(data, 1, 1, fp);
+        data[0] = ((*buf) >> 16) & 0xff;
+        fwrite(data, 1, 1, fp);
     }
 
     fclose(fp);
