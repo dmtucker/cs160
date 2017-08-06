@@ -11,7 +11,7 @@ An OpenGL Sandbox
 ``` sh
 sudo apt-get install -y g++ libglew-dev libglfw3-dev libglm-dev make
 make all
-bin/main canvases/lab3/map.ppm canvases/lab3/skin.ppm
+bin/ogbox canvases/lab3/map.ppm canvases/lab3/skin.ppm
 ```
 
 ### Known-Good Versions
