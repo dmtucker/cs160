@@ -58,9 +58,9 @@ void drawFrame ( ) {
     GLfloat s = 10;
 
                   drawCartesian();
-                  drawTerrain  ();
     if (lighting) drawSphere   (glm::translate(glm::mat4(),glm::vec3(pSelection[0])));
-    if (skeleton) drawSkeleton (glm::translate(glm::mat4(),glm::vec3(pSelection[1])));
+    if (terrain) drawTerrain();
     if (colorcube) drawColorcube(glm::scale(glm::mat4(), glm::vec3(s, s, s)));
     if (sierpinski) drawSierpinski(glm::scale(glm::mat4(), glm::vec3(s, s, s)));
+    if (skeleton) drawSkeleton(glm::translate(glm::mat4(), glm::vec3(pSelection[1])));
 }

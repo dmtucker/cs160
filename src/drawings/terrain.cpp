@@ -1,5 +1,6 @@
 #define TERRAIN_COLOR CSS_WHITE
 
+bool      terrain = true;
 canvas_t  terrainCanvas, textureCanvas;
 GLuint    terrainTriangles = 0;
 GPUbuffer terrainBuffer;

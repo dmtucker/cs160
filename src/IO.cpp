@@ -61,9 +61,10 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 putchar('\n');
                 puts("Selections");
                 puts("0                     light source");
-                puts("1                     skeleton");
+                puts("1                     terrain");
                 puts("2                     colorcube");
                 puts("3                     sierpinski tetrahedron");
+                puts("4                     skeleton");
                 putchar('\n');
                 puts("Controls");
                 puts("ctrl-scroll adjust FOV");
@@ -194,7 +195,7 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
 
         case GLFW_KEY_1:
             if (mods == GLFW_MOD_CONTROL) {
-                if (action == GLFW_PRESS) skeleton = not skeleton;
+                if (action == GLFW_PRESS) terrain = not terrain;
             }
             else selection = 1;
             break;
@@ -211,6 +212,13 @@ static void keyboard ( GLFWwindow * window , int key , int scancode , int action
                 if (action == GLFW_PRESS) sierpinski = not sierpinski;
             }
             else selection = 3;
+            break;
+
+        case GLFW_KEY_4:
+            if (mods == GLFW_MOD_CONTROL) {
+                if (action == GLFW_PRESS) skeleton = not skeleton;
+            }
+            else selection = 4;
             break;
 
         case GLFW_KEY_SPACE:
