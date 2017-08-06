@@ -20,10 +20,7 @@
 
 #include "extras.hpp"
 
- /* XXX relocate? */
-canvas_t terrain, texture;
 //XXX glm::rotate(glm::mat4(),(GLfloat) (((GLint) glfwGetTime())%360),glm::vec3(AXIS_Z));
-/**/
 
 #include     "globals.h"
 #include        "init.cpp"
@@ -39,8 +36,8 @@ int main ( int argc , char * argv[] ) {
         fprintf(stderr,"usage: %s [terrain] [texture]\n",argv[0]);
         return EXIT_FAILURE;
     }
-    if (ppmLoadCanvas(argv[1],&terrain) != 0) puts("Terrain Load Failure"); //XXX
-    if (ppmLoadCanvas(argv[2],&texture) != 0) puts("Texture Load Failure"); //XXX
+    if (ppmLoadCanvas(argv[1],&terrainCanvas) != 0) puts("Terrain Load Failure"); //XXX
+    if (ppmLoadCanvas(argv[2],&textureCanvas) != 0) puts("Texture Load Failure"); //XXX
 
     initialize();
     while (not glfwWindowShouldClose(defaultWindow)) {

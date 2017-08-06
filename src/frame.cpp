@@ -17,7 +17,7 @@ void initFrame ( ) {
         initColorcube();
         initSierpinski();
 
-        pEye   = glm::vec4(terrain.width/2,200,terrain.height/2,1);
+        pEye   = glm::vec4(terrainCanvas.width/2,200,terrainCanvas.height/2,1);
         pFocus = AXIS_ORIGIN;
     }
     else {

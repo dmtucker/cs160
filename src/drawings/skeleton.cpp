@@ -288,13 +288,13 @@ void drawSkeleton ( glm::mat4 model = glm::mat4() ) {
     model = glm::translate(model,glm::normalize(glm::vec3(vUp))*legShift);
 
     glm::vec4 pSkeleton = model*AXIS_ORIGIN;
-    skeletonTorso.model = glm::translate(model,glm::vec3(0,RED(PIXEL(terrain,(GLint) (pSkeleton.x),(GLint) (pSkeleton.z))),0));
+    skeletonTorso.model = glm::translate(model,glm::vec3(0,RED(PIXEL(terrainCanvas,(GLint) (pSkeleton.x),(GLint) (pSkeleton.z))),0));
 
 //    pSkeleton = model*AXIS_ORIGIN;
-//    if (pSkeleton.x <  0)              pSkeleton.x = 0;
-//    if (pSkeleton.x >= terrain.width)  pSkeleton.x = terrain.width-1;
-//    if (pSkeleton.z <  0)              pSkeleton.z = 0;
-//    if (pSkeleton.z >= terrain.height) pSkeleton.z = terrain.height-1;
+//    if (pSkeleton.x <  0)                    pSkeleton.x = 0;
+//    if (pSkeleton.x >= terrainCanvas.width)  pSkeleton.x = terrainCanvas.width-1;
+//    if (pSkeleton.z <  0)                    pSkeleton.z = 0;
+//    if (pSkeleton.z >= terrainCanvas.height) pSkeleton.z = terrainCanvas.height-1;
 
     if (skeletonPlay) {
 
