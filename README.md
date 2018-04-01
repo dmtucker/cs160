@@ -9,6 +9,9 @@ An OpenGL Sandbox
 ## Quickstart
 
 ``` sh
-docker build -t ogbox .
-docker run -it -u $(id -u) -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ogbox terrains/lab3.ppm textures/lab3.ppm
+docker build -t ogbox . && docker run -it \
+  -u $(id -u) \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  ogbox terrains/lab3.ppm textures/lab3.ppm
 ```
