@@ -1,12 +1,10 @@
-sudo: required
 language: cpp
 branches:
   only:
     - master
-services: docker
-install:
-  - sudo apt-get update
-  - sudo apt-get install -y indent
+addons:
+  apt:
+    packages:
+      - indent
 script:
-  - docker build .
   - make pretty && for file in src/*.cpp src/*.hpp; do diff "$file" "src/${file##*/}~"; done
