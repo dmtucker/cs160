@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 {
 
     if (argc < 3) {
-        fprintf(stderr, "usage: %s [terrain] [texture]\n", argv[0]);
+        fprintf(stderr, "usage: %s terrain texture\n", argv[0]);
         return EXIT_FAILURE;
     }
     if (ppmLoadCanvas(argv[1], &terrainCanvas) != 0)
