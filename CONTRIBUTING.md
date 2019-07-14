@@ -26,9 +26,7 @@ Use [`docker`](https://docs.docker.com/) to deploy and run the project source co
 # Build and deploy the project:
 docker build -t dmtucker/ogbox:dev .
 docker run -it \
-  -u $(id -u) \
-  -e DISPLAY=$DISPLAY \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -e DISPLAY="$DISPLAY" -u "$(id -u)" -v /tmp/.X11-unix:/tmp/.X11-unix \
   dmtucker/ogbox:dev terrains/lab3.ppm textures/lab3.ppm
 ```
 
